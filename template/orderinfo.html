@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'orderinfo.css' %}" rel='stylesheet'>
+
+<body>
+    <div class="ordercontainer">
+        <form name="check" action="checkorder" method="POST" style="width:100%" id="checkorder">
+            <h1>THÔNG TIN GIAO HÀNG</h1>
+            {% csrf_token %}
+            <input type="text" name="phone" placeholder="Số điện thoại" />
+            <input type="text" name="address" placeholder="Địa chỉ cụ thể" />
+            <input type="text" name="province" placeholder="Tỉnh/thành" />
+            <input type="text" name="ward" placeholder="Quận/huyện" />
+            <input type="text" name="commune" placeholder="Phường/xã" />
+            <p>
+                <input style ="width:20px" value="CK" type="checkbox" name="checkbox" placeholder="CHUYỂN KHOẢN" />
+                <label style="font-family: Nunito; font-size: 25px; font-weight: 700; line-height: 34px; letter-spacing: 0em; text-align: left;" for="test1">CHUYỂN KHOẢN</label>
+              </p>
+            <div class="btngrid">
+                <a href="{% url 'home' %}order/cart"><button form="checkorder" type="button" class="btn btn-primary yellowcolor">QUAY LẠI GIỎ HÀNG</button></a>
+                <button form="checkorder" type="submit" class="btn btn-primary">HOÀN TẤT ĐƠN HÀNG</button>
+            </div>
+        </form>
+        <div class="mainproductcontainer">
+            {% for order in orders %}
+            <div class="productcheckcontainer">
+                <img src="{{ order.image.url }}">
+                <div class="productcheckcard">
+                    <p class="productchecktitle">{{ order.name }}</p>
+                    <p class="productcheckquantity">Số lượng: {{ order.quantity }}</p>
+                    <p class="productcheckprice">{{ order.price }}.000 VND</p>
+                </div>
+            </div>
+            {% endfor %}
+            <div style="border: 1px solid #827F7F; margin-top:20px; margin-left:10px; width:90%"></div>
+            <input type="text" name="promotioncode" class="promotioncode"placeholder="Mã giảm giá">
+            <button class ="buttonpromotion">Sử dụng</button>
+            <div style="border: 1px solid #827F7F; margin-top:20px; margin-left:10px;width:90%"></div>
+            <div class="totalmoney">
+                <p class="lefttext">Tạm tính</p><p class="righttext">40.000 VND</p>
+                <p class="lefttext">Phí vận chuyển</p><p class="righttext">10,000 VND</p>
+                <p class="lefttext">Áp dụng mã giảm giá</p><p class="righttext">0 VND</p>
+            </div>
+            <div style="border: 1px solid #827F7F; margin-top:20px; margin-left:10px;width:90%"></div>
+            <p class="thanhtien">THÀNH TIỀN</p>
+            <p class="thanhtienso">50.000 VND</p>
+        </div>
+    </div>
+</body>
+<script>
+    // find all product check containers
+const productContainers = document.querySelectorAll(".productcheckcontainer");
+
+// calculate total price and quantity
+let totalPrice = 0;
+let totalQuantity = 0;
+productContainers.forEach(container => {
+    const priceStr = container.querySelector(".productcheckprice").textContent;
+    const price = parseInt(priceStr.split(".")[0]);
+    const quantityStr = container.querySelector(".productcheckquantity").textContent;
+    const quantity = parseInt(quantityStr.split(":")[1].trim());
+    totalPrice += price * quantity;
+    totalQuantity += quantity;
+});
+
+// update tam tinh and thanh tien values
+const tamTinhP = document.querySelector(".totalmoney p.lefttext:first-child");
+const tamTinhValueP = tamTinhP.nextElementSibling;
+tamTinhValueP.textContent = `${totalPrice.toLocaleString()},000 VND`;
+
+const thanhTienSo = document.querySelector(".thanhtienso");
+thanhTienSo.textContent = `${(totalPrice + 10).toLocaleString()},000 VND`;
+
+</script>
+{% endblock %}

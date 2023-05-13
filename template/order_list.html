@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<style>
+    .navmenu{
+        padding-left: 0;
+    }</style>
+<body>
+    <section >
+        <div class="greenline" style="width: 100%; height: 40px; background: #91B377;">
+            <p class="textgreenline">TRANG CHỦ / {{ title }}</p>
+        </div>
+        <div class="orderlistcontainer">
+            <nav class ="navmenu2">
+                <ul>
+                    <li><a href="plant">
+                            <p class="greentextmenu">HẠT GIỐNG</p>
+                        </a></li>
+                    <ul>
+                        <li><a href="veg">
+                                <p class="textmenu1">Rau</p>
+                            </a></li>
+                        <li><a href="flower">
+                                <p class="textmenu1">Hoa</p>
+                            </a></li>
+                        <li><a href="cuqua">
+                                <p class="textmenu1">Củ quả</p>
+                            </a></li>
+                    </ul>
+                    <li><a href="pot">
+                            <p class="greentextmenu">DỤNG CỤ TRỒNG CÂY</p>
+                        </a></li>
+                    <ul>
+                        <li><a href="pot">
+                                <p class="textmenu1">Chậu Cây</p>
+                            </a></li>
+                        <ul>
+                            <li><a href="#"><p class="textmenu2">Chậu cây sẵn</p></a></li>
+                            <li><a href="#"><p class="textmenu2">Trang trí chậu cây</p></a></li>
+                            <!-- <li><a href="gompot">
+                                    <p class="textmenu2">Chậu gốm</p>
+                                </a></li>
+                            <li><a href="hangpot">
+                                <p class="textmenu2">Chậu treo</p>
+                            </a></li>
+                            <li><a href="plapot">
+                                <p class="textmenu2">chậu nhựa</p>
+                            </a></li> -->
+                            <li><a href="decor">
+                                <p class="textmenu2">Trang trí chậu cây</p>
+                            </a></li>
+                        </ul>
+                        <li><a href="other">
+                                <p class="textmenu1">Dụng cụ khác</p>
+                            </a></li>
+                    </ul>
+                    <li><a href="soil">
+                            <p class="greentextmenu">ĐẤT / GIÁ THỂ TRỒNG</p>
+                        </a></li>
+                </ul>
+            </nav>
+            <div><h1>{{ title }}</h1>
+                <div class="itemcontainer">
+                {% for food in orders %}
+                <a href="{{food.id}}"><div class="itemcard">
+                    <div class="cardimg"><img src="{{food.image.url}}"></div>
+                    <div class="cardtext">
+                        <p>{{food.name}}</p>
+                    </div>
+                    <div class="cardprice">
+                        <p>{{food.price}}.000 VND</p>
+                    </div>
+                </div></a>
+                {% endfor %}
+                </div>
+        </div></div>
+    </section>
+</body>
+{% endblock %}
+<!--<body>
+{% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}
+      <script>alert("{{ message }}")</script> 
+    {% endif %}
+    {% endfor %}
+{% endif %}
+<ul class="menu">
+    <div class="menu_icon"></div>
+      <li><a href="../">Main Menu</a></li>
+      <li><a href="../order/chicken">Chicken</a></li>
+      <li><a href="../order/pizza">Pizza</a></li>
+      <li><a href="../order/combo">Combo</a></li>
+      <li><a href="../order/asian">Asian food</a></li>
+      <li><a href="../order/beverage">Beverage</a></li>
+</ul>
+    <section class = "product_list">
+    <h1>
+        <span>Menu</span>
+    </h1>
+    <div class = "product_container">
+    {% for food in orders %}
+        <div class = "card">
+            <div class="card_image"> 
+                <img src="{{food.image.url}}" alt="" class = "c_image">
+            </div>
+            <div class = "card_description">
+            {{food.desc}}
+            </div>
+            {% if food.d_price == 0 %}
+            <div class = "card_price">
+                ${{food.price}}
+            </div>  
+            {% else %}
+            <div class = "card_price1">
+                <s>${{food.price}}</s>
+            <span class = "d_price">
+                    ${{food.d_price}}
+            </span>
+            </div>
+            {% endif %} 
+            <button class = "card_button">
+                <a method="POST" href="{{food.id}}">Order</a>
+            </button>
+        </div>
+    {% endfor %}
+    </div>
+</section>
+</body>
+</html> -->

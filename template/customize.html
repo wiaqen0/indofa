@@ -1,0 +1,170 @@
+
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<body>
+  <style>
+    input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+    }
+  
+    input[type=file]::file-selector-button:hover {
+      background: #0d45a5;
+    }
+  </style>
+  <canvas id="myCanvas" width="700" height="700"></canvas>
+  <label class="file">
+    <!-- <input type="file" accept="image/*"> -->
+    <input type="file" id="imgFile" accept="image/*" >
+    <span class="file-custom"></span>
+  </label>
+  <!-- <input type="file" id="imgFile" > -->
+  <button onclick="saveCanvas()" style="font-family: 'Nunito'; font-style: normal; color: #ffffff; font-size: 100%; font-size:1em;width:200px;height:50px;padding: 0; border: none;border-radius:10px;background-color:rgb(108, 166, 51);">Save customization</button>
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let img;
+
+
+    const images = [];
+
+
+    function addImage(src) {
+      const image = new Image();
+      image.onload = function() {
+        images.push({
+          x: 0,
+          y: 0,
+          width: 400,
+          height: 400,
+          image: image,
+          isResizing: false
+        });
+        drawImages();
+      };
+      image.src = src;
+    }
+
+    function drawImages() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < images.length; i++) {
+        const image = images[i];
+        ctx.drawImage(image.image, image.x, image.y, image.width, image.height);
+        if (image.isResizing) {
+          canvas.style.cursor = "nwse-resize";
+        } else {
+          canvas.style.cursor = "default";
+        }
+      }
+    }
+
+
+    function updateImage(index, x, y) {
+      const image = images[index];
+      image.x = x - image.width / 2;
+      image.y = y - image.height / 2;
+      drawImages();
+    }
+
+
+    function updateImageSize(index, width, height) {
+      const image = images[index];
+      image.width = width;
+      image.height = height;
+      drawImages();
+    }
+
+
+    let isDragging = false;
+    let isResizing = false;
+    let dragIndex = -1;
+    let resizeIndex = -1;
+    canvas.addEventListener("mousedown", function(event) {
+      const mouseX = event.clientX - canvas.offsetLeft;
+      const mouseY = event.clientY - canvas.offsetTop;
+      for (let i = images.length - 1; i >= 0; i--) {
+        const image = images[i];
+        if (mouseX >= image.x && mouseX <= image.x + image.width &&
+            mouseY >= image.y && mouseY <= image.y + image.height) {
+          if (mouseX >= image.x + image.width - 10 && mouseY >= image.y + image.height - 10) {
+            isResizing = true;
+            resizeIndex = i;
+            break;
+          } else {
+            isDragging = true;
+            dragIndex = i;
+            const offsetX = mouseX - image.x;
+            const offsetY = mouseY - image.y;
+            updateImage(dragIndex, mouseX - offsetX, mouseY - offsetY);
+            break;
+          }
+        }
+      }
+    });
+    canvas.addEventListener("mousemove", function(event) {
+      const mouseX = event.clientX - canvas.offsetLeft;
+      const mouseY = event.clientY - canvas.offsetTop;
+      if (isDragging && dragIndex >= 0) {
+        updateImage(dragIndex, mouseX, mouseY);
+      } else if (isResizing && resizeIndex >= 0) {
+        const image = images[resizeIndex];
+        const newWidth = mouseX - image.x;
+        const newHeight = mouseY - image.y;
+        updateImageSize(resizeIndex, newWidth, newHeight);
+      } else {
+        for (let i = images.length - 1; i >= 0; i--) {
+          const image = images[i];
+          if (mouseX >= image.x + image.width - 10 && mouseY >= image.y + image.height - 10) {
+            canvas.style.cursor = "nwse-resize";
+            break;
+          } else {
+            canvas.style.cursor = "default";
+          }
+        }
+      }
+    });
+    canvas.addEventListener("mouseup", function(event) {
+      isDragging = false;
+      isResizing = false;
+      dragIndex = -1;
+      resizeIndex = -1;
+    });
+  
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    const imgFile = document.getElementById("imgFile");
+    imgFile.addEventListener("change", function() {
+      const file = imgFile.files[0];
+      addImage("{% static 'chaucustom.png'%}");
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        addImage(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+  <script>
+    function saveCanvas() {
+      // Get the canvas element
+      var canvas = document.getElementById("myCanvas");
+      // Create a new image from the canvas
+      var image = canvas.toDataURL("image/png");
+      // Create a link element with the image as its href
+      var link = document.createElement("a");
+      link.download = "myCanvas.png";
+      link.href = image;
+      // Click the link to download the image
+      link.click();
+  }
+</script>
+</body>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="font-family: comic sans ms; text-align:center;">MONTHLY REVENUE OF WEOW</h1>
+    <div id="container" style="width: 85%;">
+        <canvas id="population-chart" data-url="{% url 'chart' %}"></canvas>
+      </div>
+      {% load static %}
+      <script language="JavaScript" type="text/javascript" src="{% static 'jquery.js' %}"></script>
+    <script language="JavaScript" type="text/javascript" src="{% static 'chart.js' %}"></script>
+      <script>
+    
+        $(function () {
+    
+          var $populationChart = $("#population-chart");
+          $.ajax({
+            url: $populationChart.data("url"),
+            success: function (data) {
+    
+              var ctx = $populationChart[0].getContext("2d");
+    
+              new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: data.label,
+                  datasets: [{
+                    label: 'Revenue',
+                    backgroundColor: '#8cd3ff',
+                    data: data.data
+                  }]          
+                },
+                options: {
+                  responsive: true,
+                  legend: {
+                    position: 'top',
+                  },
+                  title: {
+                    display: true,
+                    text: 'Revenue chart'
+                  }
+                }
+              });
+    
+            }
+          });
+    
+        });
+        
+      </script>
+</body>
+</html>

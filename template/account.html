@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<link href="{% static 'account.css' %}" rel='stylesheet'>
+<body>
+    <h1>TÀI KHOẢN CỦA BẠN</h1>
+    <div class="accountcontainer">
+        <div class ="accountcontainerdetail">
+            <p class="taikhoan">TÀI KHOẢN</p>
+            <a><p class ="taikhoandetail">Thông tin tài khoản</p></a>
+            <a><p class ="taikhoandetail">Danh sách đơn hàng</p></a>
+            <a href="logout"><p class ="taikhoandetail">Đăng xuất</p></a>
+        </div>
+        <div class ="accountinfo">
+            <p class="accountinfolargetext">THÔNG TIN TÀI KHOẢN</p>
+            <div class="basicinfo">
+                <p>Họ và tên: {{user.first_name }} {{user.last_name }}</p>
+                <p>Email: {{user.email }}</p>
+            </div>
+            <div class="accountorder">
+                <p class="accountinfolargetext">DANH SÁCH ĐƠN HÀNG</p>
+                <table>
+                    <tbody>
+                    <tr>
+                      <th class ="mainth">Mã đơn hàng</th>
+                      <th class ="mainth">Ngày tạo</th>
+                      <th class ="mainth">Thành tiền</th>
+                      <th class ="mainth">Trạng thái</th>
+                    </tr>
+                    {% for order in orders %}
+                    <tr>
+                        <th>{{ order.id }}</th>
+                        <th>{{ order.time }}</th>
+                        <th>{{ order.total_price }}</th>
+                        <th>{{ order.status }}</th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

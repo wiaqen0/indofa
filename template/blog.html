@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'blog.css' %}" rel='stylesheet'>
+<body>
+   <div class ="blcontainer">
+    <h1 class="blogh1">CẨM NANG LÀM VƯỜN CÙNG INDOFA</h1>
+    <p class="blogtext1">Làm vườn không khó, có INDOFA lo. Cùng bạn tận hưởng cuộc sống theo cách riêng.</p>
+    <div class ="blogcontainer">
+        <a href="blog/1"><div class="blogcard">
+            <div class="cardimg"><img class ="blogimgsample" src="{% static 'dautay2.jpg' %}"></div>
+            <p class="blogtitle">MÁCH BẠN BÍ QUYẾT CHĂM RAU XANH TỐT</p>
+        </div></a>
+        <a href="blog/2"><div class="blogcard">
+            <div class="cardimg"><img class ="blogimgsample" src="{% static 'anhtuoicay.png' %}"></div>
+            <p class="blogtitle">MẸO CẦN THIẾT CHO NGƯỜI MỚI TẬP LÀM VƯỜN</p>
+        </div></a>
+        <a href="blog/3"><div class="blogcard">
+            <div class="cardimg"><img class ="blogimgsample" src="{% static 'anhnhieutrai.jpg' %}"></div>
+            <p class="blogtitle">10 Ý TƯỞNG CỰC LẠ TRANG TRÍ CHẬU CÂY</p>
+        </div></a>
+        
+    </div>
+    
+</div> 
+</body>
+
+{% endblock %}

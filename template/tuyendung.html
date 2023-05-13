@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<link href="{% static 'tuyendung.css' %}" rel='stylesheet'>
+<body>
+<div style = "width:100%; text-align:center;"><p style = "font-family: 'Nunito'; font-style: normal; font-weight: 700; font-size: 40px; line-height: 55px;  color: #4F340D;">THÔNG TIN TUYỂN DỤNG</p>
+<p class="soluong">Hiện có: </p>
+<p class="soluong blacktexts">3 việc làm</p></div>
+<div class="maincontainer">
+    <div style = "width:100%; margin-left:50%; transform:translateX(-50%); padding-top:20px;" class ="tuyendungcontainer">
+        <p class = "tuyendungtitle">UI/UX Designer</p>
+        <br>
+        <img src="{% static 'dollar.png' %}"><p>15.000.000 - 20.000.000</p>
+        <br>
+        <img src="{% static 'location.png' %}"><p>Thành phố Hồ Chí Minh</p>
+        <div style="text-align:right;"><p style="color:red;">Hạn nộp: 06/06/2023</p></div>
+        <div style = "border: 1px solid #827F7F;"></div>
+    </div>
+    <div style = "width:100%; margin-left:50%; transform:translateX(-50%); padding-top:20px;" class ="tuyendungcontainer">
+        <p class = "tuyendungtitle">Website Developer</p>
+        <br>
+        <img src="{% static 'dollar.png' %}"><p>15.000.000 - 20.000.000</p>
+        <br>
+        <img src="{% static 'location.png' %}"><p>Thành phố Hồ Chí Minh</p>
+        <div style="text-align:right;"><p style="color:red;">Hạn nộp: 06/06/2023</p></div>
+        <div style = "border: 1px solid #827F7F;"></div>
+    </div>
+    <div style = "width:100%; margin-left:50%; transform:translateX(-50%); padding-top:20px;" class ="tuyendungcontainer">
+        <p class = "tuyendungtitle">Content Creater</p>
+        <br>
+        <img src="{% static 'dollar.png' %}"><p>15.000.000 - 20.000.000</p>
+        <br>
+        <img src="{% static 'location.png' %}"><p>Thành phố Hồ Chí Minh</p>
+        <div style="text-align:right;"><p style="color:red;">Hạn nộp: 06/06/2023</p></div>
+        <!-- <div style = "border: 1px solid #827F7F;"></div> -->
+    </div>
+</div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,100 @@
+.blcontainer{
+    width: 80%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.blogcontainer{
+    display:grid;
+    column-gap: 20px;
+    grid-template-columns: repeat(3,33%);
+}
+.blcontainer .blogimg{
+    width: 100%;
+    object-fit: contain;
+    /* margin-left: 50%;
+    transform: translateX(-50%); */
+}
+.blcontainer .blogh1{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    padding-left: 10%;
+    color: #4F340D;
+}
+.blcontainer .h1padding0{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 55px;
+    color: #4F340D;
+}
+.blcontainer h2{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    color: #000000;
+}
+.blcontainer h3{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    color: #000000;
+}
+.blogtext1{
+    font-family: 'Nunito';
+    text-align: justify;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    color: #000000
+}
+.blogcontainer .blogcard{
+    height: auto;
+}
+.blogcontainer .blogcard img{
+    object-fit: contain;
+    width: 100%;
+}
+.blogcontainer .blogcard .timetext{
+font-family: 'Nunito';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 20px;
+
+color: #000000;
+}
+.blogcontainer .blogcard .blogtitle{font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 27px;
+    color: #000000;}
+
+@media screen and (max-width: 767px){
+    .blogcontainer{
+        display:grid;
+        grid-template-columns: repeat(1,100%);
+    }
+    .blcontainer{
+        margin-left: 50%;
+        transform: translateX(-50%);
+        
+    }
+    
+.blcontainer .blogh1{
+    font-size:1.4em;
+    width:80%;
+}
+    /* .blcontainer .blogh1 {
+        font-size:1.6em !important;
+    padding:0%!important;
+padding-left:0!important; 
+margin-left:10%!important;} */
+}

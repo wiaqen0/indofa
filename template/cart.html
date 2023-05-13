@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'cart.css' %}" rel='stylesheet'>
+<style>
+    header nav .navmenu{
+        margin-left:0;
+        padding-top:70px;
+        padding-left: 0;
+    }
+</style>
+<body>
+    <div class="Container">
+        <div class="cover">
+            <h1 class="title">GIỎ HÀNG CỦA BẠN</h1>
+            <form method = "POST" action="checkout">
+            <div class="wrapRow">
+                <div class="wrapColLeft">
+                    {% for order in orders %}
+                    
+                    <div class="colleft">
+                        <!-- <div class="wrapCheckbox">
+                            <input type="checkbox" class="checkbox" checked="false" />
+                        </div> -->
+                        <div class="infoItem">
+                            <div class="wrapImage">
+                                <img src="{{ order.image.url }}" alt="" class="image" />
+                            </div>
+                            <div class="wrapContent">
+                                <div class="textContent">
+                                    <p class="titleItem">{{ order.name }}</p>
+                                    <p id = "amountItem" class="amountItem">{{ order.price }}.000 VND</p>
+                                </div>
+                                <div class="wrapAmount">
+                                    {% csrf_token %}
+                                    <button type="button" onclick="decreaseValue({{ order.id }});myFunction()" class="btnSub">-</button>
+                                    <input onchange="myFunction()" id ="totalAmount{{ order.id }}" name="totalAmount{{ order.id }}" class="totalAmount" value ="{{ order.quantity }}" min =0>
+                                    <button type="button" onclick="increaseValue({{ order.id }});myFunction()" class="btnAdd">+</button>
+                                </div>
+                            </div>
+                            <div class="wrapBtnExit">
+                                <a href="delete/{{ order.id }}"><div class="btnExit">
+                                    <img src="{% static 'ic_exit.png' %}" alt="" class="imgExit" />
+                                </div></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="wrapColRight">
+                    <div class="colRight">
+                        <div class="wrapTitle">
+                            <p class="titleRight">THÔNG TIN ĐƠN HÀNG</p>
+                        </div>
+                        <div class="wrapTotalAmountRight">
+                            <div class="wrapTextTotal">
+                                <p class="textTotal">Tổng tiền:</p>
+                            </div>
+                            <div class="infoTotal"><p id="infoTotal" style="display:inline;"></p>,000 VND</div>
+                        </div>
+                        <div class="wrapBtnBottom">
+                            <button type="button" class="btnLeftColRight">
+                                <a href = "{% url 'home' %}order/plant"><p class="textBtnLeftDesktop">TIẾP TỤC MUA SẮM</p></a>
+                                <a href = "{% url 'home' %}order/plant"><p class="textBtnLeftMobile">TIẾP TỤC<br />MUA SẮM</p></a>
+                            </button>
+                            <button  type="submit" class="btnRightColRight">THANH TOÁN</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapColRightMobile">
+              <div class="colRight">
+                <div class="wrapTitle">
+                  <p class="titleRight">THÔNG TIN ĐƠN HÀNG</p>
+                </div>
+                <div class="wrapTotalAmountRight">
+                    <div class="wrapTextTotal">
+                        <p class="textTotal">Tổng tiền:</p>
+                    </div>
+                    <div class="infoTotal"><p id="infoTotal2" style="display:inline;"></p>,000 VND</div>
+                </div>
+                <div class="wrapBtnBottom">
+                  <button class="btnLeftColRight">TIẾP TỤC MUA SẮM</button>
+                  <button  type="submit"  class="btnRightColRight">THANH TOÁN</button>
+                </div>
+              </div>
+            </div>
+        </form>
+        </div>
+    </div>
+
+</body>
+<script>
+    function decreaseValue(orderId) {
+        var input = document.getElementById("totalAmount" + orderId);
+        var currentValue = parseInt(input.value);
+        var newValue = currentValue - 1;
+        input.value = newValue < 0 ? 0 : newValue;
+        myFunction();
+    }
+
+    function increaseValue(orderId) {
+        var input = document.getElementById("totalAmount" + orderId);
+        var currentValue = parseInt(input.value);
+        var newValue = currentValue + 1;
+        input.value = newValue;
+        myFunction();
+    }
+
+    function myFunction() {
+        var amountItems = document.getElementsByClassName("amountItem");
+        var totalAmounts = document.getElementsByClassName("totalAmount");
+        var infoTotal = document.getElementById("infoTotal");
+        var infoTotal2 = document.getElementById("infoTotal2");
+
+        var total = 0;
+        for (var i = 0; i < amountItems.length; i++) {
+            var amountText = amountItems[i].textContent;
+            var totalAmountText = totalAmounts[i].value;
+            amountText = amountText.replace("VND", "").trim();
+            totalAmountText = totalAmountText.replace("VND", "").trim();
+
+            var amount = parseInt(amountText);
+            var totalAmount = parseInt(totalAmountText);
+
+            if (isNaN(amount) || isNaN(totalAmount)) {
+                continue;
+            }
+
+            total += amount * totalAmount;
+            infoTotal.textContent = total.toLocaleString();
+            infoTotal2.textContent = total.toLocaleString();
+        }
+    }
+
+    myFunction();
+</script>
+
+{% endblock %}

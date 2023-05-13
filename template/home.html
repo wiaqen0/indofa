@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+    {% if message.tags %}
+      <script>alert("{{ message }}")</script> 
+    {% endif %}
+    {% endfor %}
+{% endif %}
+{% load static %}
+<!-- <header class="banner">
+    <div class="header-banner"></div>
+    <nav>
+        <div class="site-logo" href = "#"><img src="{% static 'trans_nlogo1.png' %}" class="logo"></div>
+        <ul>
+            <li><a href="order/order"><img src="{% static 'Cart_Icon.png' %}"></a></li>
+            <li><a href="#menu"><img src="{% static 'Order_Icon.png' %}"></a></li>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <li><a href="chart"><img src="{% static 'Statistic.png' %}"></a></li>
+            {% endif %}
+            <li><a href="register/logout"><img src="{% static 'Logout_Icon.png' %}"></a></li>
+            {% else %}
+            <li><a href="register/login"><img src="{% static 'User_Icon.png' %}"></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header> -->
+
+
+<body>
+    <section class="bannersection" id="bannersection">
+        <div class="banner" id="banner">
+            <input type="radio" id="banner1" class="sec-1-input" name="banner">
+            <input type="radio" id="banner2" class="sec-1-input" name="banner">
+            <input type="radio" id="banner3" class="sec-1-input" name="banner">
+            <input type="radio" id="banner4" class="sec-1-input" name="banner" value="" checked="checked">
+            <div class="slider">
+                <div id="top-banner-1" class="relative banner">
+                    <div class="banner-inner-wrapper">
+                        <img id="banner-image" src="{% static 'ibanner1.png' %}" alt="Banner Image">
+                    </div>
+                </div>
+                <div id="top-banner-2" class="banner">
+                    <div class="banner-inner-wrapper">
+                        <img id="banner-image" src="{% static 'ibanner2.png' %}" alt="Banner Image">
+                    </div>
+                </div>
+                <div id="top-banner-3" class="banner">
+                    <div class="banner-inner-wrapper">
+                        <img id="banner-image" src="{% static 'ibanner3.png' %}" alt="Banner Image">
+                    </div>
+                </div>
+                <div id="top-banner-4" class="banner">
+                    <div class="banner-inner-wrapper">
+                        <img id="banner-image" src="{% static 'ibanner4.png' %}" alt="Banner Image">
+                    </div>
+                </div>
+            </div>
+            <div id="radio-buttons"></div>
+        </div>
+    </section>
+<section>
+    <div class = "container">
+    <div class="visioncontainer">
+    <div class="card">
+        <div class="circle">
+            <img src="{% static 'vision.png' %}">
+        </div>
+        <div class="textcontainer vision">
+            <div class="cardtext">
+                <p class="cardtitle">Tầm nhìn</p>
+                <div>
+                    <p class="cardtext">Trở thành nhà cung cấp sản phẩm hàng đầu trong lĩnh vực trồng trọt trong nhà.
+                        Mang đến cho một cách tiếp cận mới và tiện lợi hơn để trồng trọt trong nhà, tận dụng không gian
+                        hiệu quả hơn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="circle ">
+            <img src="{% static 'mission.png' %}">
+        </div>
+        <div class="textcontainer mission">
+            <div class="cardtext">
+                <p class="cardtitle">Sứ mệnh</p>
+                <div>
+                    <p class="cardtext">Cung cấp các sản phầm chất lượng cao, an toàn và bền vững trong lĩnh vực trồng trọt trong nhà. Trở thành người đồng hành cùng khách hàng trong trải nghiệm trồng cây.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="circle">
+            <img src="{% static 'corevalue.png' %}">
+        </div>
+        <div class="textcontainer corevalue">
+            <div class="cardtext">
+                <p class="cardtitle">Giá trị cốt lõi</p>
+                <div>
+                    <p class="cardtext">“If life was a branch, why don't we enjoy every leaf?” - Tận hưởng cuộc sống như những chiếc lá trên từng nhành cây.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<section>
+    <h1>HẠT GIỐNG</h1>
+    <div class="itemcontainer">
+        {% for item in plant %}
+        <a href = "order/{{ item.id }}"><div class ="itemcard">
+            <div class="cardimg"><img src="{{ item.image.url }}"></div>
+            <div class="cardtext">
+                <p>{{ item.name }}</p>
+            </div>
+            <div class="cardprice">
+                <p>{{ item.price }}.000 VND</p></div>
+        </div></a>
+        {% endfor %}
+    </div>
+    <div class = "buttoncontainer"><a href ="order/plant"><div class="moreproducts">XEM THÊM<span class="arrow"></span></div></a></div>
+</section>
+<section>
+    <h1>DỤNG CỤ TRỒNG CÂY</h1>
+    <div class="itemcontainer">
+        {% for item in pot %}
+        <a href = "order/{{ item.id }}"><div class ="itemcard">
+            <div class="cardimg"><img src="{{ item.image.url }}"></div>
+            <div class="cardtext">
+                <p>{{ item.name }}</p>
+            </div>
+            <div class="cardprice">
+                <p>{{ item.price }}.000 VND</p></div>
+        </div></a>
+        {% endfor %}
+    </div>
+    <div>
+        <div class = "buttoncontainer"><a href ="order/pot"><div class="moreproducts">XEM THÊM<span class="arrow"></span></div></a></div>
+    </div>
+</section>
+<section>
+    <div class="thietke">
+        <div class="anhthietke">
+            <img src="{% static 'thietkechau.png' %}">
+        </div>
+        <div class="text">
+            <p class="firstline">TỰ THIẾT KẾ</p>
+            <p class="secondline">CHẬU CÂY</p>
+            <p class="lastline">Tô vẽ hoặc in hình để trang trì chậu cây của riêng bạn</p>
+            <div class = "buttoncontainer"><div class = "timhieuthem">
+                <a href="order/customize">
+                    <div class="moreproducts">TÌM HIỂU THÊM<span class="arrow"></span></div>
+                </a>
+            </div></div>
+        </div>
+    </div>
+</section>
+<section>
+    <h1>ĐẤT/GIÁ THỂ TRỒNG</h1>
+    <div class="itemcontainer">
+        {% for item in other %}
+        <a href = "order/{{ item.id }}"><div class ="itemcard">
+            <div class="cardimg"><img src="{{ item.image.url }}"></div>
+            <div class="cardtext">
+                <p>{{ item.name }}</p>
+            </div>
+            <div class="cardprice">
+                <p>{{ item.price }}.000 VND</p></div>
+        </div></a>
+        {% endfor %}
+        </div>
+    </div>
+    <div>
+        <div class = "buttoncontainer"><a href ="order/soil"><div class="moreproducts">XEM THÊM<span class="arrow"></span></div></a></div>
+    </div>
+</section>
+<section class = "cammang">
+    <div class="thietke">
+        <div class="text">
+            <p class="firstline ">CẨM NANG</p>
+            <p class="secondline ">LÀM VƯỜN</p>
+            <p class="lastline">Làm vườn không chỉ là trồng và chăm sóc cây</p> 
+            <p class="lastline">Làm vườn là để tận hưởng cuộc sống</p>
+            <div class = "buttoncontainer"><div class = "timhieuthem">
+                <a href="blog">
+                    <div class="moreproducts">TÌM HIỂU THÊM<span class="arrow"></span></div>
+                </a>
+            </div></div>
+        </div>
+        <div class="anhthietke">
+            <img src="{% static 'camnang.png' %}">
+        </div>
+    </div>
+</section>
+<section class = "newpost">
+    <h1>BÀI VIẾT MỚI NHẤT</h1>
+    <div class="itemcontainer">
+        <a href ="blog/1" ><div class ="itemcard">
+            <div class="cardimg"><img class ="blogimgsample" src="{% static 'dautay2.jpg' %}"></div>
+            <div class="cardtext">
+                <p>MÁCH BẠN BÍ QUYẾT CHĂM RAU XANH TỐT</p>
+            </div>
+            <div class="cardprice">
+            </div>
+        </div></a>
+        <a href ="blog/2" ><div class ="itemcard">
+            <div class="cardimg"><img class ="blogimgsample" src="{% static 'anhtuoicay.png' %}"></div>
+            <div class="cardtext">
+                <p>MẸO CẦN THIẾT CHO NGƯỜI MỚI TẬP LÀM VƯỜN</p>
+            </div>
+            <div class="cardprice">
+            </div>
+        </div></a>
+        <a href ="blog/3" ><div class ="itemcard">
+            <div class="cardimg"><img class ="blogimgsample" src="{% static 'anhnhieutrai.jpg' %}"></div>
+            <div class="cardtext">
+                <p>10 Ý TƯỞNG CỰC LẠ TRANG TRÍ CHẬU CÂY</p>
+            </div>
+            <div class="cardprice">
+            </div>
+        </div></a>
+    </div>
+    <div>
+        <div class = "buttoncontainer"><a href ="blog"><div class="moreproducts">XEM THÊM<span class="arrow"></span></div></a></div>
+    </div>
+</section>
+
+</body>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<link href="{% static 'cart.css' %}" rel='stylesheet'>
+<style>
+    header nav .navmenu{
+        margin-left:0;
+        padding-top:70px;
+        padding-left: 0;
+    }
+</style>
+
+<body>
+<div class="griddisplaycontainer">
+    <div class = "AAAAA" style="height:auto;"><img style="width:100%;height:auto;object-fit:contain;" src="{% static 'nkisuccessorder.png' %}"></div>
+    <div class = "rightcornersuccess">
+        <img style = "height:200px;width:200px"src="{% static 'successorder.png' %}">
+        <p class ="maintext">ĐẶT HÀNG THÀNH CÔNG</p>
+        <p class ="subtext">Cảm ơn bạn đã lựa chọn Indofa. Hãy kiểm tra hòm thư của mình nhé</p>
+        <div class="wrapBtnBottom">
+            <button type="button" class="btnLeftColRight">
+                <a href = "{% url 'home' %}order/plant"><p class="textBtnLeftDesktop">TIẾP TỤC MUA SẮM</p></a>
+                <a href = "{% url 'home' %}order/plant"><p class="textBtnLeftMobile">TIẾP TỤC<br />MUA SẮM</p></a>
+            </button>
+            <a href = "{% url 'home' %}"><button  type="button" class="btnRightColRight">QUAY VỀ TRANG CHỦ</button></a>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}
