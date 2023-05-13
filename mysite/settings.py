@@ -19,8 +19,8 @@ config = dotenv_values('D:\Data\PersonalData\IndofaEmail.env')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-EMAIL_HOST_USER   = config['USER']
-EMAIL_HOST_PASSWORD = config['PASSWORD']
+EMAIL_HOST_USER   = "Indofa1804@gmail.com"
+EMAIL_HOST_PASSWORD = 'qybwkivbwkyncdlv'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
