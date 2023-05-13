@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import dotenv_values, set_key
+import django_heroku
+import dj_database_url
 config = dotenv_values('D:\Data\PersonalData\IndofaEmail.env')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,11 +35,11 @@ EMAIL_USE_TLS = True
 SECRET_KEY = 'django-insecure--%#jled$**r(4pn!ij+7kzox+1!=kn12vo5_^n2if2ncr($5=2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['192.168.223.130' ,'127.0.0.1']
 # py manage.py runserver 192.168.13.130:8181
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -146,3 +148,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+django_heroku.settings(locals)
