@@ -29,3 +29,5 @@ class OrderLine(models.Model):
     quantity = models.IntegerField(null= True)
     image= models.ImageField(upload_to='food_images')
     status = models.BooleanField(default=False)
+class CanvasImage(models.Model):
+    image = models.ImageField(upload_to='canvas_images')

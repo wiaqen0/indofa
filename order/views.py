@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from calc.models import food, order,OrderLine
+from calc.models import food, order,OrderLine, CanvasImage
 from django.contrib.auth.models import User
 from django.contrib import messages
 import datetime
@@ -17,6 +17,8 @@ from django.utils.encoding import force_str
 from mysite import settings
 from calc.models import food, order,OrderLine
 EMAIL_ACCOUNT = settings.EMAIL_HOST_USER
+from django.shortcuts import render
+from django.http import JsonResponse
 from django.utils.html import strip_tags
 def delete_order(request, id):
     if request.user.is_authenticated:
@@ -124,7 +126,12 @@ def decor(request):
     context = {"orders": orders, "title": title}
     return render(request, "order_list.html", context)
 def customize(request):
-    return render(request, "customize.html")
+    if request.method == 'POST' and request.FILES.get('image'):
+        canvas_image = CanvasImage(image=request.FILES['image'])
+        canvas_image.save()
+        return render(request, "customize.html")
+    else:
+        return render(request, "customize.html")
 def checkout(request):
     orders = OrderLine.objects.filter(username=request.user.username,status = False)
     context = {'orders': orders}
