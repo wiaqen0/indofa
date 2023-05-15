@@ -265,7 +265,9 @@ body #banner {
     object-fit: fill;
 }
 .footersection .footer-content{
-  margin: 0 5.5em;
+  margin-left:80%;
+  transform: translateX(-50%);
+  /* margin: 0 3.5em; */
   display: flex;
   justify-content: space-between;
 }
@@ -1037,6 +1039,11 @@ transform: translateX(-50%);}
     width: 100%;
 }
 
+.footersection .footer-content{
+  margin-left:0%;
+  transform: translateX(0%);
+  margin: 0 3.5em;
+}
 .cammang .text .firstline{
     text-align: center;
 }
@@ -1045,6 +1052,10 @@ transform: translateX(-50%);}
 }
 .cammang .text .lastline{
     text-align: center;
+}
+
+.footersection .lasttext{
+  padding-left: 20px;
 }
 .cammang .thietke .text .timhieuthem {
     left:50%;
