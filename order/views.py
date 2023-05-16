@@ -176,8 +176,6 @@ def saveorder(request):
                 for order1 in orders.all():
                     total_price += order1.price*order1.quantity
                     order1.status = True
-                    print(total_price)
-                    order1.save()
                 time = datetime.datetime.now()
                 try:
                     CK_status = request.POST['checkbox']
@@ -194,6 +192,9 @@ def saveorder(request):
                 status = "Đang xử lý"
                 ordermain = order(username=username,address=address,province=province,ward=ward,commune=commune,phone=phone,time=time,CK=CK,status=status,total_price=total_price)
                 ordermain.save()
+                for order1 in orders.all():
+                    order1.orderid = ordermain.id
+                    order1.save()
                 email_subject = "[INDOFA - XÁC NHẬN ĐƠN HÀNG ĐÃ ĐƯỢC ĐẶT]"
                 message2 = render_to_string('templatemailsuccess.html', {
                             'name': request.user.last_name,

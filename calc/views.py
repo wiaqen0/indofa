@@ -4,6 +4,8 @@ from .models import food
 def home(request):
     if request.get_host() == 'indofa.herokuapp.com' or request.get_host() == 'www.indofa.herokuapp.com':
         return redirect('https://www.indofa.store')
+    if request.get_host() == 'indofa.store' or request.get_host() == 'indofa.store':
+        return redirect('https://www.indofa.store')
     else:
         plant = food.objects.filter(type__in=['HẠT GIỐNG HOA','HẠT GIỐNG RAU'], active=True)[:4]
         pot = food.objects.filter(type__in=['CHẬU GỐM', 'CHẬU NHỰA', 'CHẬU TREO'], active=True)[:4]
