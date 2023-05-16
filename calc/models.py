@@ -30,4 +30,5 @@ class OrderLine(models.Model):
     image= models.ImageField(upload_to='food_images')
     status = models.BooleanField(default=False)
 class CanvasImage(models.Model):
+    username = models.CharField(max_length=100)
     image = models.ImageField(upload_to='canvas_images')

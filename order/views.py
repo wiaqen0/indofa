@@ -127,7 +127,8 @@ def decor(request):
     return render(request, "order_list.html", context)
 def customize(request):
     if request.method == 'POST' and request.FILES.get('image'):
-        canvas_image = CanvasImage(image=request.FILES['image'])
+        username = request.user.username
+        canvas_image = CanvasImage(image=request.FILES['image'], username=username)
         canvas_image.save()
         return render(request, "customize.html")
     else:

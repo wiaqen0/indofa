@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import food, order, OrderLine
+from .models import food, order, OrderLine,CanvasImage
 # Register your models here.
 class Filter_food(admin.ModelAdmin):
     list_display = ('name', 'desc', 'image', 'price', 'type', 'd_price', 'active')
@@ -10,6 +10,10 @@ class Filter_order(admin.ModelAdmin):
 class Filter_orderline(admin.ModelAdmin):
     # list_display = ('username', 'food', 'quantity')
     list_filter = ('username', 'food')
+class Filter_canvas(admin.ModelAdmin):
+    list_display = ('username', 'image')
+    list_filter = ('username',)
 admin.site.register(food, Filter_food)
 admin.site.register(order)
 admin.site.register(OrderLine)
+admin.site.register(CanvasImage,Filter_canvas)
