@@ -125,6 +125,11 @@ def decor(request):
     title = "TRANG TRÍ CHẬU CÂY"
     context = {"orders": orders, "title": title}
     return render(request, "order_list.html", context)
+def filter(request):
+    orders = food.objects.filter(type__in=['TRANG TRÍ CHẬU CÂY'], active=True)
+    title = "TRANG TRÍ CHẬU CÂY"
+    context = {"orders": orders, "title": title}
+    return render(request, "order_list.html", context)
 def customize(request):
     if request.method == 'POST' and request.FILES.get('image'):
         username = request.user.username

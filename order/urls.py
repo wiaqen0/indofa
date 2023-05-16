@@ -20,4 +20,5 @@ urlpatterns = [
     path('checkorder', saveorder, name='checkorder'),
     path('checkout', checkout, name='checkout'),
     path('register/account', returnhome, name='returnhome'),
+    path('filter', returnhome, name='filter'),
 ]
