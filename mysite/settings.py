@@ -41,7 +41,7 @@ DEBUG = True
 # py manage.py runserver 192.168.13.130:8181
 ALLOWED_HOSTS = ['*']
 
-
+SITE_DOMAIN = "www.indofa.store"
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'middleware.CanonicalDomainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
