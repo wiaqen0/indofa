@@ -20,7 +20,7 @@ def speblog(request):
     return render(request, "blogspe.html")
 def speblog2(request):
     return render(request, "blogspe2.html")
-def speblog3(request):
+def speblog3(request): # bùa thầy Nghĩa
     return render(request, "blogspe3.html")
 def tuyendung(request):
     return render(request,"tuyendung.html")

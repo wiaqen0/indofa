@@ -131,11 +131,16 @@ def filter(request):
     context = {"orders": orders, "title": title}
     return render(request, "order_list.html", context)
 def customize(request):
-    if request.method == 'POST' and request.FILES.get('image'):
-        username = request.user.username
-        canvas_image = CanvasImage(image=request.FILES['image'], username=username)
-        canvas_image.save()
-        return render(request, "customize.html")
+    if request.user.is_authenticated:
+        if request.method == 'POST' and request.FILES.get('image'):
+            username = request.user.username
+            canvas_image = CanvasImage(image=request.FILES['image'], username=username)
+            canvas_image.save()
+            orders = OrderLine(username = username,food=99999, quantity=1, name="Chậu custom", price=30, image=request.FILES['image'])
+            orders.save()
+            return render(request, "customize.html")
+        else:
+            return render(request, "customize.html")
     else:
         return render(request, "customize.html")
 def checkout(request):
@@ -231,7 +236,7 @@ def cart(request):
             redirect('/account/login')
         for order in orders.all():
             print(order.id)
-        return redirect('/')
+        return redirect('/order/checkout')
     if request.user.is_authenticated:
         return render(request, "cart.html", context)
     else:
