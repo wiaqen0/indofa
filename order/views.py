@@ -177,6 +177,10 @@ def saveorder(request):
                 ward = request.POST['ward']
                 commune = request.POST['commune']
                 phone = request.POST['phone']
+                lst = [address, province, ward, commune, phone]
+                for i in lst:
+                    if len(i) == 0:
+                        return render(request, "orderinfo.html", context)
                 total_price = 0
                 for order1 in orders.all():
                     total_price += order1.price*order1.quantity
@@ -198,6 +202,7 @@ def saveorder(request):
                 ordermain = order(username=username,address=address,province=province,ward=ward,commune=commune,phone=phone,time=time,CK=CK,status=status,total_price=total_price)
                 ordermain.save()
                 for order1 in orders.all():
+                    order1.status = True
                     order1.orderid = ordermain.id
                     order1.save()
                 email_subject = "[INDOFA - XÁC NHẬN ĐƠN HÀNG ĐÃ ĐƯỢC ĐẶT]"
