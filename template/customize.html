@@ -27,7 +27,7 @@
     <span class="file-custom"></span>
   </label>
   <!-- <input type="file" id="imgFile" > -->
- <button onclick="saveCanvas(); saveCanvasImage();" style="font-family: 'Nunito'; font-style: normal; color: #ffffff; font-size: 100%; font-size:1em;width:200px;height:50px;padding: 0; border: none;border-radius:10px;background-color:rgb(108, 166, 51);">Save customization</button>
+ <button onclick="saveCanvas(); saveCanvasImage();" style="font-family: 'Nunito'; font-style: normal; color: #ffffff; font-size: 100%; font-size:1em;width:200px;height:50px;padding: 0; border: none;border-radius:10px;background-color:rgb(108, 166, 51);">Lưu thiết kế</button>
   <a href = "{% url 'home' %}order/cart"><button  style="font-family: 'Nunito'; font-style: normal; color: #ffffff; font-size: 100%; font-size:1em;width:200px;height:50px;padding: 0; border: none;border-radius:10px;background-color:rgb(206, 186, 54);">Thanh toán</button></a></div>
   <script>
     const canvas = document.getElementById("myCanvas");
@@ -46,7 +46,8 @@
           width: 700,
           height: 700,
           image: image,
-          isResizing: false
+          isResizing: false,
+          isMovable: false
         });
         drawImages();
       };
@@ -67,7 +68,8 @@
           width: 220,
           height: 220,
           image: image,
-          isResizing: false
+          isResizing: false,
+          isMovable: true
         });
     
         drawImages();
@@ -116,7 +118,8 @@
           mouseX >= image.x &&
           mouseX <= image.x + image.width &&
           mouseY >= image.y &&
-          mouseY <= image.y + image.height
+          mouseY <= image.y + image.height &&
+          image.isMovable == true
         ) {
           if (
             mouseX >= image.x + image.width - resizeMargin &&
