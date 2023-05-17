@@ -51,7 +51,7 @@ def dynamic_lookup_view(request, id):
                 return render(request, "specificproduct.html", context)         
             orders = OrderLine(username = username1,food=foods, quantity=quantity, name=name, price=price, image=url)
             orders.save()
-            return redirect('/order/plant')
+            return redirect('/order/cart')
         except:
             return render(request, "specificproduct.html", context)
     else:

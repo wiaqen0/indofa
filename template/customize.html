@@ -20,13 +20,15 @@
     }
   </style>
   <canvas id="myCanvas" width="700" height="700"></canvas>
+  <div style = "width: 100%; text-align:center;">
   <label class="file">
     <!-- <input type="file" accept="image/*"> -->
     <input type="file" id="imgFile" accept="image/*" >
     <span class="file-custom"></span>
   </label>
   <!-- <input type="file" id="imgFile" > -->
-  <button onclick="saveCanvas(); saveCanvasImage();" style="font-family: 'Nunito'; font-style: normal; color: #ffffff; font-size: 100%; font-size:1em;width:200px;height:50px;padding: 0; border: none;border-radius:10px;background-color:rgb(108, 166, 51);">Save customization</button>
+ <button onclick="saveCanvas(); saveCanvasImage();" style="font-family: 'Nunito'; font-style: normal; color: #ffffff; font-size: 100%; font-size:1em;width:200px;height:50px;padding: 0; border: none;border-radius:10px;background-color:rgb(108, 166, 51);">Save customization</button>
+  <a href = "{% url 'home' %}order/cart"><button  style="font-family: 'Nunito'; font-style: normal; color: #ffffff; font-size: 100%; font-size:1em;width:200px;height:50px;padding: 0; border: none;border-radius:10px;background-color:rgb(206, 186, 54);">Thanh toán</button></a></div>
   <script>
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
