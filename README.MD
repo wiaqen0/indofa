@@ -9,7 +9,10 @@ pip install -r requirements.txt
 
 
 ## To run the project, use:
-
+```bash
+python manage.py migrate
+```
+Then
 ```bash
 python manage.py runserver
 ```
