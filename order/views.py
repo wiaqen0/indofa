@@ -20,6 +20,8 @@ EMAIL_ACCOUNT = settings.EMAIL_HOST_USER
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.utils.html import strip_tags
+
+
 def delete_order(request, id):
     if request.user.is_authenticated:
         if request.user.username == OrderLine.objects.get(id=id).username:
@@ -29,6 +31,13 @@ def delete_order(request, id):
             return redirect('/order/cart')
     else:
         return redirect("/register/login")
+    
+def query_from_product_name(request, product):
+    orders = food.objects.filter(type__in=[product], active=True)
+    title = "CHẬU CÂY"
+    context = {"orders": orders, "title": title}
+    return render(request, "order_list.html", context)
+
 def dynamic_lookup_view(request, id):
     obj = food.objects.get(id = id)
     context = {
@@ -70,66 +79,66 @@ def get_user_order(request):
         return render(request, "check_order.html", context)
     else:
         return redirect('/register/login')
-def pot_order(request):
-    orders = food.objects.filter(type__in=['CHẬU GỐM', 'CHẬU NHỰA', 'CHẬU TREO'], active=True)
-    title = "CHẬU CÂY"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def gompot_order(request):
-    orders = food.objects.filter(type__in=['CHẬU GỐM'], active=True)
-    title = "CHẬU CÂY / CHẬU GỐM"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def plapot_order(request):
-    orders = food.objects.filter(type__in=['CHẬU NHỰA'], active=True)
-    title = "CHẬU CÂY / CHẬU NHỰA"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def hangpot_order(request):
-    orders = food.objects.filter(type__in=['CHẬU TREO'], active=True)
-    title = "CHẬU CÂY / CHẬU TREO"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def other_order(request):
-    orders = food.objects.filter(type__in=['DỤNG CỤ KHÁC'], active=True)
-    title = "CHẬU CÂY / DỤNG CỤ KHÁC"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def plant_order(request):
-    orders = food.objects.filter(type__in=['HẠT GIỐNG HOA','HẠT GIỐNG RAU'], active=True)
-    title = "HẠT GIỐNG"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def flower_order(request):
-    orders = food.objects.filter(type__in=['HẠT GIỐNG HOA'], active=True)
-    title = "HẠT GIỐNG / HẠT GIỐNG HOA"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def cuqua_order(request):
-    orders = food.objects.filter(type__in=['HẠT GIỐNG CỦ QUẢ'], active=True)
-    title = "HẠT GIỐNG / HẠT GIỐNG CỦ QUẢ"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def veg_order(request):
-    orders = food.objects.filter(type__in=['HẠT GIỐNG RAU'], active=True)
-    title = "HẠT GIỐNG / HẠT GIỐNG RAU"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def soil_order(request):
-    orders = food.objects.filter(type__in=['ĐẤT / GIÁ THỂ TRỒNG'], active=True)
-    title = "ĐẤT / GIÁ THỂ TRỒNG"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def decor(request):
-    orders = food.objects.filter(type__in=['TRANG TRÍ CHẬU CÂY'], active=True)
-    title = "TRANG TRÍ CHẬU CÂY"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
-def filter(request):
-    orders = food.objects.filter(type__in=['TRANG TRÍ CHẬU CÂY'], active=True)
-    title = "TRANG TRÍ CHẬU CÂY"
-    context = {"orders": orders, "title": title}
-    return render(request, "order_list.html", context)
+# def pot_order(request):
+#     orders = food.objects.filter(type__in=['CHẬU GỐM', 'CHẬU NHỰA', 'CHẬU TREO'], active=True)
+#     title = "CHẬU CÂY"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def gompot_order(request):
+#     orders = food.objects.filter(type__in=['CHẬU GỐM'], active=True)
+#     title = "CHẬU CÂY / CHẬU GỐM"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def plapot_order(request):
+#     orders = food.objects.filter(type__in=['CHẬU NHỰA'], active=True)
+#     title = "CHẬU CÂY / CHẬU NHỰA"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def hangpot_order(request):
+#     orders = food.objects.filter(type__in=['CHẬU TREO'], active=True)
+#     title = "CHẬU CÂY / CHẬU TREO"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def other_order(request):
+#     orders = food.objects.filter(type__in=['DỤNG CỤ KHÁC'], active=True)
+#     title = "CHẬU CÂY / DỤNG CỤ KHÁC"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def plant_order(request):
+#     orders = food.objects.filter(type__in=['HẠT GIỐNG HOA','HẠT GIỐNG RAU'], active=True)
+#     title = "HẠT GIỐNG"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def flower_order(request):
+#     orders = food.objects.filter(type__in=['HẠT GIỐNG HOA'], active=True)
+#     title = "HẠT GIỐNG / HẠT GIỐNG HOA"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def cuqua_order(request):
+#     orders = food.objects.filter(type__in=['HẠT GIỐNG CỦ QUẢ'], active=True)
+#     title = "HẠT GIỐNG / HẠT GIỐNG CỦ QUẢ"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def veg_order(request):
+#     orders = food.objects.filter(type__in=['HẠT GIỐNG RAU'], active=True)
+#     title = "HẠT GIỐNG / HẠT GIỐNG RAU"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def soil_order(request):
+#     orders = food.objects.filter(type__in=['ĐẤT / GIÁ THỂ TRỒNG'], active=True)
+#     title = "ĐẤT / GIÁ THỂ TRỒNG"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def decor(request):
+#     orders = food.objects.filter(type__in=['TRANG TRÍ CHẬU CÂY'], active=True)
+#     title = "TRANG TRÍ CHẬU CÂY"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
+# def filter(request):
+#     orders = food.objects.filter(type__in=['TRANG TRÍ CHẬU CÂY'], active=True)
+#     title = "TRANG TRÍ CHẬU CÂY"
+#     context = {"orders": orders, "title": title}
+#     return render(request, "order_list.html", context)
 def customize(request):
     if request.user.is_authenticated:
         if request.method == 'POST' and request.FILES.get('image'):
@@ -230,6 +239,7 @@ def saveorder(request):
         return redirect("/register/login")
 def successfulorder(request):
     return render(request,"ordersuccess.html")
+
 def cart(request):
     orders = OrderLine.objects.filter(username=request.user.username, status= False)
     context = {'orders': orders}

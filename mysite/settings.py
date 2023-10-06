@@ -38,8 +38,8 @@ SECRET_KEY = 'django-insecure--%#jled$**r(4pn!ij+7kzox+1!=kn12vo5_^n2if2ncr($5=2
 DEBUG = True
 
 # ALLOWED_HOSTS = ['192.168.223.130' ,'127.0.0.1']
-# py manage.py runserver 192.168.13.130:8181
-ALLOWED_HOSTS = ['*']
+# py manage.py runserver 192.168.43.203:8181
+ALLOWED_HOSTS = ['192.168.0.108']
 
 SITE_DOMAIN = "www.indofa.store"
 # Application definition
